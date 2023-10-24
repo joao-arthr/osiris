@@ -7,7 +7,8 @@ import org.springframework.data.annotation.Id;
 @Data
 abstract public class Usuario {
     @Id
-    private ObjectId id;
+    private ObjectId _id;
+    private String nome;
     private String email;
     private String senha;
 }

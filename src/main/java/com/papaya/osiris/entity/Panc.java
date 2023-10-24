@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "panc")
 public class Panc {
     @Id
-    private ObjectId id;
+    private ObjectId _id;
     private String nome;
     private String descricao;
     private String cultivo;

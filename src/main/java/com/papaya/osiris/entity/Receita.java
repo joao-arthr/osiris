@@ -15,11 +15,12 @@ import java.util.List;
 @Document(collection = "receitas")
 public class Receita {
     @Id
-    private ObjectId id;
+    private ObjectId _id;
     private String nome;
     private List<Panc> pancs;
     private List<String> ingredientes;
     private List<String> preparo;
     private Integer likes;
     private String imagem;
+    private ObjectId usuarioId;
 }
