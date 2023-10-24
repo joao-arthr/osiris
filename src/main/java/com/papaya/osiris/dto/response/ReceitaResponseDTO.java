@@ -25,5 +25,17 @@ public record ReceitaResponseDTO(
                 receita.getUsuarioId().toString()
         );
     }
+
+    public static ReceitaResponseDTO fromReceita(Receita receita) {
+        return new ReceitaResponseDTO(
+                receita.getId().toString(),
+                receita.getNome(),
+                receita.getPancs(),
+                receita.getIngredientes(),
+                receita.getPreparo(),
+                receita.getImagem(),
+                receita.getUsuarioId().toString()
+        );
+    }
 }
 

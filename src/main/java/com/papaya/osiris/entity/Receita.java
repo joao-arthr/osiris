@@ -22,7 +22,6 @@ public class Receita {
     private List<Panc> pancs;
     private List<String> ingredientes;
     private List<String> preparo;
-    private Integer likes;
     private String imagem;
     private ObjectId usuarioId;
 }
