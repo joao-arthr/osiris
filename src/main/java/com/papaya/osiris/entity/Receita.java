@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
@@ -15,7 +16,8 @@ import java.util.List;
 @Document(collection = "receitas")
 public class Receita {
     @Id
-    private ObjectId _id;
+    @Field("_id")
+    private ObjectId id;
     private String nome;
     private List<Panc> pancs;
     private List<String> ingredientes;

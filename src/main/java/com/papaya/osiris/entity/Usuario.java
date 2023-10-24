@@ -3,11 +3,13 @@ package com.papaya.osiris.entity;
 import lombok.Data;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Data
-abstract public class Usuario {
+public abstract class Usuario {
     @Id
-    private ObjectId _id;
+    @Field("_id")
+    private ObjectId id;
     private String nome;
     private String email;
     private String senha;
