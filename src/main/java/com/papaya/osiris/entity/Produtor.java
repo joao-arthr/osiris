@@ -12,10 +12,5 @@ import java.util.List;
 @NoArgsConstructor
 @Document(collection = "")
 public class Produtor extends Usuario {
-    private String cnpj;
-    private List<String> celular;
-    private String endereco;
     private Assinatura assinatura;
-    private String imagem;
-
 }

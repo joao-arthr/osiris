@@ -8,9 +8,6 @@ public record ProdutorResponseDTO(
         String id,
         String nome,
         String email,
-        String cnpj,
-        List<String> celular,
-        String endereco,
         AssinaturaDTO assinatura,
         String imagem
 ) {}

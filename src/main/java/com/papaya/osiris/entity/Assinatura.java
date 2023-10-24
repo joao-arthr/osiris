@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -11,6 +12,6 @@ import java.util.Date;
 @NoArgsConstructor
 public class Assinatura {
     private boolean ativa;
-    private Date dataInicio;
-    private Date dataTermino;
+    private LocalDate dataInicio;
+    private LocalDate dataTermino;
 }
