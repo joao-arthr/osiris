@@ -12,7 +12,6 @@ public record ReceitaResponseDTO(
         List<Panc> pancs,
         List<String> ingredientes,
         List<String> preparo,
-        Integer likes,
         String imagem,
         String usuarioId
 ) {
@@ -22,7 +21,6 @@ public record ReceitaResponseDTO(
                 receita.getPancs(),
                 receita.getIngredientes(),
                 receita.getPreparo(),
-                receita.getLikes(),
                 receita.getImagem(),
                 receita.getUsuarioId().toString()
         );
