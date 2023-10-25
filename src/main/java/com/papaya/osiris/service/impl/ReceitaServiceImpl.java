@@ -1,10 +1,13 @@
 package com.papaya.osiris.service.impl;
+import com.papaya.osiris.dto.request.ReceitaRequestDTO;
 import com.papaya.osiris.dto.response.ReceitaResponseDTO;
 import com.papaya.osiris.entity.Receita;
+import com.papaya.osiris.exception.ReceitaNotFoundException;
 import com.papaya.osiris.exception.ResourceNotFoundException;
 import com.papaya.osiris.repository.ReceitaRepository;
 import com.papaya.osiris.service.ReceitaService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.bson.types.ObjectId;
 
@@ -31,24 +34,21 @@ public class ReceitaServiceImpl implements ReceitaService {
     @Override
     public ReceitaResponseDTO encontrarReceitaPorId(String id) {
         var response = receitaRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Receita não encontrada: " + id));
+                .orElseThrow(() -> new ReceitaNotFoundException(id));
         return new ReceitaResponseDTO(response);
     }
 
     @Override
-    public ReceitaResponseDTO criarReceita(Receita receita) {
-        return new ReceitaResponseDTO(receitaRepository.save(receita));
+    public ReceitaResponseDTO criarReceita(ReceitaRequestDTO receitaRequest) {
+        return new ReceitaResponseDTO(receitaRepository.save(new Receita(receitaRequest)));
     }
 
     @Override
-    public ReceitaResponseDTO atualizarReceita(String id, Receita novaReceita) {
-        Optional<Receita> receitaExistente = receitaRepository.findById(id);
-        if (receitaExistente.isPresent()) {
-            novaReceita.setId(id);
-            return new ReceitaResponseDTO(receitaRepository.save(novaReceita));
-        } else {
-            return null;
-        }
+    public ReceitaResponseDTO atualizarReceita(String id, ReceitaRequestDTO receitaRequest) {
+        Receita receitaExistente = receitaRepository.findById(id)
+                .orElseThrow(() -> new ReceitaNotFoundException(id));
+        BeanUtils.copyProperties(receitaRequest, receitaExistente);
+        return new ReceitaResponseDTO(receitaRepository.save(receitaExistente));
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.papaya.osiris.service.impl;
 import com.papaya.osiris.dto.request.PancRequestDTO;
 import com.papaya.osiris.dto.response.PancResponseDTO;
 import com.papaya.osiris.entity.Panc;
+import com.papaya.osiris.exception.PancNotFoundException;
 import com.papaya.osiris.exception.ResourceNotFoundException;
 import com.papaya.osiris.repository.PancRepository;
 import com.papaya.osiris.service.PancService;
@@ -26,16 +27,16 @@ public class PancServiceImpl implements PancService {
 
     @Override
     public PancResponseDTO atualizarPanc(String id, PancRequestDTO pancRequest) {
-        Panc pancExistente = pancRepository.findById(new ObjectId(id))
-                .orElseThrow(() -> new ResourceNotFoundException("Panc não encontrada com o ID: " + id));
+        Panc pancExistente = pancRepository.findById(id)
+                .orElseThrow(() -> new PancNotFoundException(id));
         BeanUtils.copyProperties(pancRequest, pancExistente);
         return new PancResponseDTO(pancRepository.save(pancExistente));
     }
 
     @Override
     public PancResponseDTO buscarPancPorId(String id) {
-        Panc panc = pancRepository.findById(new ObjectId(id))
-                .orElseThrow(() -> new ResourceNotFoundException("Panc não encontrada com o ID: " + id));
+        Panc panc = pancRepository.findById(id)
+                .orElseThrow(() -> new PancNotFoundException(id));
         return new PancResponseDTO(panc);
     }
 
@@ -49,7 +50,7 @@ public class PancServiceImpl implements PancService {
 
     @Override
     public void excluirPancPorId(String id) {
-        pancRepository.deleteById(new ObjectId(id));
+        pancRepository.deleteById(id);
     }
 }
 
