@@ -16,25 +16,25 @@ public record ReceitaResponseDTO(
         String usuarioId
 ) {
     public ReceitaResponseDTO(Receita receita) {
-        this(receita.getId().toString(),
+        this(receita.getId(),
                 receita.getNome(),
                 receita.getPancs(),
                 receita.getIngredientes(),
                 receita.getPreparo(),
                 receita.getImagem(),
-                receita.getUsuarioId().toString()
+                receita.getUsuarioId()
         );
     }
 
     public static ReceitaResponseDTO fromReceita(Receita receita) {
         return new ReceitaResponseDTO(
-                receita.getId().toString(),
+                receita.getId(),
                 receita.getNome(),
                 receita.getPancs(),
                 receita.getIngredientes(),
                 receita.getPreparo(),
                 receita.getImagem(),
-                receita.getUsuarioId().toString()
+                receita.getUsuarioId()
         );
     }
 }

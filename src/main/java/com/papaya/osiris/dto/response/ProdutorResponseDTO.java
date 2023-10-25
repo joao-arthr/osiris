@@ -13,7 +13,7 @@ public record ProdutorResponseDTO(
         String imagem
 ) {
     public ProdutorResponseDTO(Produtor produtor) {
-        this(produtor.getId().toString(),
+        this(produtor.getId(),
                 produtor.getNome(),
                 produtor.getEmail(),
                 new AssinaturaDTO(

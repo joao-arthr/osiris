@@ -1,6 +1,7 @@
 package com.papaya.osiris.service.impl;
 import com.papaya.osiris.dto.response.ReceitaResponseDTO;
 import com.papaya.osiris.entity.Receita;
+import com.papaya.osiris.exception.ResourceNotFoundException;
 import com.papaya.osiris.repository.ReceitaRepository;
 import com.papaya.osiris.service.ReceitaService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class ReceitaServiceImpl implements ReceitaService {
     public List<ReceitaResponseDTO> listarTodasReceitas() {
         var response = receitaRepository.findAll();
         if (response.isEmpty()) {
-            throw new RuntimeException("Nenhuma receita encontrada");
+            throw new ResourceNotFoundException("Nenhuma receita encontrada");
         }
         return response.stream()
                 .map(ReceitaResponseDTO::fromReceita)
@@ -28,9 +29,9 @@ public class ReceitaServiceImpl implements ReceitaService {
     }
 
     @Override
-    public ReceitaResponseDTO encontrarReceitaPorId(ObjectId id) {
+    public ReceitaResponseDTO encontrarReceitaPorId(String id) {
         var response = receitaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Receita não encontrada: " + id.toString()));
+                .orElseThrow(() -> new ResourceNotFoundException("Receita não encontrada: " + id));
         return new ReceitaResponseDTO(response);
     }
 
@@ -40,7 +41,7 @@ public class ReceitaServiceImpl implements ReceitaService {
     }
 
     @Override
-    public ReceitaResponseDTO atualizarReceita(ObjectId id, Receita novaReceita) {
+    public ReceitaResponseDTO atualizarReceita(String id, Receita novaReceita) {
         Optional<Receita> receitaExistente = receitaRepository.findById(id);
         if (receitaExistente.isPresent()) {
             novaReceita.setId(id);
@@ -51,7 +52,7 @@ public class ReceitaServiceImpl implements ReceitaService {
     }
 
     @Override
-    public void deletarReceita(ObjectId id) {
+    public void deletarReceita(String id) {
         receitaRepository.deleteById(id);
     }
 }

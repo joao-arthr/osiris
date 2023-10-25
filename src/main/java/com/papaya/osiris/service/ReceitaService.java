@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public interface ReceitaService {
     List<ReceitaResponseDTO> listarTodasReceitas();
-    ReceitaResponseDTO encontrarReceitaPorId(ObjectId id);
+    ReceitaResponseDTO encontrarReceitaPorId(String id);
     ReceitaResponseDTO criarReceita(Receita receita);
-    ReceitaResponseDTO atualizarReceita(ObjectId id, Receita novaReceita);
-    void deletarReceita(ObjectId id);
+    ReceitaResponseDTO atualizarReceita(String id, Receita novaReceita);
+    void deletarReceita(String id);
 }

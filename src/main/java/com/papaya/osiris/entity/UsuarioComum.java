@@ -13,6 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 @Document("usuario")
 public class UsuarioComum extends Usuario {
-    private List<ObjectId> pancsFavoritasId;
-    private List<ObjectId> receitasSalvasId;
+    private List<String> pancsFavoritasId;
+    private List<String> receitasSalvasId;
 }

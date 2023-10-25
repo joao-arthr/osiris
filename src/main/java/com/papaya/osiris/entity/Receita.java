@@ -1,5 +1,6 @@
 package com.papaya.osiris.entity;
 
+import com.papaya.osiris.dto.request.ReceitaRequestDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,12 +17,20 @@ import java.util.List;
 @Document(collection = "receitas")
 public class Receita {
     @Id
-    @Field("_id")
-    private ObjectId id;
+    private String id;
     private String nome;
     private List<Panc> pancs;
     private List<String> ingredientes;
     private List<String> preparo;
     private String imagem;
-    private ObjectId usuarioId;
+    private String usuarioId;
+
+    public Receita(ReceitaRequestDTO receitaRequest) {
+        this.nome = receitaRequest.nome();
+        this.pancs = receitaRequest.pancs();
+        this.ingredientes = receitaRequest.ingredientes();
+        this.preparo = receitaRequest.preparo();
+        this.imagem = receitaRequest.imagem();
+        this.usuarioId = receitaRequest.usuarioId();
+    }
 }

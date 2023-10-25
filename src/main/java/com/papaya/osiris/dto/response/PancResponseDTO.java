@@ -10,7 +10,7 @@ public record PancResponseDTO(
         String imagem
 ) {
     public PancResponseDTO(Panc panc) {
-        this(panc.getId().toString(),
+        this(panc.getId(),
                 panc.getNome(),
                 panc.getDescricao(),
                 panc.getCultivo(),

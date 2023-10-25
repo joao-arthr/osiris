@@ -14,29 +14,13 @@ public record UsuarioComumResponseDTO(
         List<String> pancsFavoritasId,
         List<String> receitasSalvasId
 ) {
-    public static UsuarioComumResponseDTO create(
-            String id,
-            String nome,
-            String email,
-            String imagem,
-            List<String> pancsFavoritasId,
-            List<String> receitasSalvasId
-    ) {
-        return new UsuarioComumResponseDTO(id, nome, email, imagem, pancsFavoritasId, receitasSalvasId);
-    }
-
-    public static UsuarioComumResponseDTO fromUsuarioComum(UsuarioComum usuario) {
-        return new UsuarioComumResponseDTO(
-                usuario.getId().toString(),
+    public UsuarioComumResponseDTO(UsuarioComum usuario) {
+        this(usuario.getId().toString(),
                 usuario.getNome(),
                 usuario.getEmail(),
                 usuario.getImagem(),
-                usuario.getPancsFavoritasId().stream()
-                        .map(ObjectId::toString)
-                        .collect(Collectors.toList()),
-                usuario.getReceitasSalvasId().stream()
-                        .map(ObjectId::toString)
-                        .collect(Collectors.toList())
+                usuario.getPancsFavoritasId(),
+                usuario.getReceitasSalvasId()
         );
     }
 }

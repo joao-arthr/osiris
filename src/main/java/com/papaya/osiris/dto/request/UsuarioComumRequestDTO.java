@@ -1,7 +1,5 @@
 package com.papaya.osiris.dto.request;
 
-import org.bson.types.ObjectId;
-
 import java.util.List;
 
 public record UsuarioComumRequestDTO(
@@ -9,6 +7,6 @@ public record UsuarioComumRequestDTO(
         String email,
         String senha,
         String imagem,
-        List<ObjectId> pancsFavoritasId,
-        List<ObjectId> receitasSalvasId
+        List<String> pancsFavoritasId,
+        List<String> receitasSalvasId
 ) {}
