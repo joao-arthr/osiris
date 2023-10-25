@@ -2,10 +2,8 @@ package com.papaya.osiris.service.impl;
 
 import com.papaya.osiris.dto.request.ProdutorRequestDTO;
 import com.papaya.osiris.dto.response.ProdutorResponseDTO;
-import com.papaya.osiris.dto.response.ReceitaResponseDTO;
 import com.papaya.osiris.entity.Produtor;
 import com.papaya.osiris.exception.ProdutorNotFoundException;
-import com.papaya.osiris.exception.ResourceNotFoundException;
 import com.papaya.osiris.repository.ProdutorRepository;
 import com.papaya.osiris.service.ProdutorService;
 import lombok.RequiredArgsConstructor;

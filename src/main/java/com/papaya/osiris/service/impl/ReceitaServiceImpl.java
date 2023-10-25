@@ -3,16 +3,14 @@ import com.papaya.osiris.dto.request.ReceitaRequestDTO;
 import com.papaya.osiris.dto.response.ReceitaResponseDTO;
 import com.papaya.osiris.entity.Receita;
 import com.papaya.osiris.exception.ReceitaNotFoundException;
-import com.papaya.osiris.exception.ResourceNotFoundException;
+import com.papaya.osiris.exception.UsuarioNotFoundException;
 import com.papaya.osiris.repository.ReceitaRepository;
 import com.papaya.osiris.service.ReceitaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import org.bson.types.ObjectId;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,7 +22,7 @@ public class ReceitaServiceImpl implements ReceitaService {
     public List<ReceitaResponseDTO> listarTodasReceitas() {
         var response = receitaRepository.findAll();
         if (response.isEmpty()) {
-            throw new ResourceNotFoundException("Nenhuma receita encontrada");
+            throw new UsuarioNotFoundException("Nenhuma receita encontrada");
         }
         return response.stream()
                 .map(ReceitaResponseDTO::fromReceita)

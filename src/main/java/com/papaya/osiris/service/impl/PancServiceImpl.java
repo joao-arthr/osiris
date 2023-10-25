@@ -4,11 +4,9 @@ import com.papaya.osiris.dto.request.PancRequestDTO;
 import com.papaya.osiris.dto.response.PancResponseDTO;
 import com.papaya.osiris.entity.Panc;
 import com.papaya.osiris.exception.PancNotFoundException;
-import com.papaya.osiris.exception.ResourceNotFoundException;
 import com.papaya.osiris.repository.PancRepository;
 import com.papaya.osiris.service.PancService;
 import lombok.RequiredArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
