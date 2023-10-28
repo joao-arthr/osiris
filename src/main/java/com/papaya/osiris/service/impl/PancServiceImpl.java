@@ -45,7 +45,7 @@ public class PancServiceImpl implements PancService {
         List<Panc> todasAsPancs = pancRepository.findAll();
         return todasAsPancs.stream()
                 .map(PancResponseDTO::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

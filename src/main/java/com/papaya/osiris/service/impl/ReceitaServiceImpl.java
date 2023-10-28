@@ -26,7 +26,7 @@ public class ReceitaServiceImpl implements ReceitaService {
         }
         return response.stream()
                 .map(ReceitaResponseDTO::fromReceita)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
