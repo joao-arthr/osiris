@@ -22,15 +22,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final SecurityFilter securityFilter;
+
+    private static final String[] USUARIO_ENDPOINTS = {
+            "/usuarios/**",
+            "/receitas/**"
+    };
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.GET, "/usuarios").hasAuthority(Perfil.USUARIO.toString())
-                        .requestMatchers(HttpMethod.PUT, "/usuarios").hasAuthority(Perfil.USUARIO.toString())
-                        .requestMatchers(HttpMethod.DELETE, "/usuarios").hasAuthority(Perfil.USUARIO.toString())
                         .requestMatchers("/pancs").hasAuthority(Perfil.ADMIN.toString())
+                        .requestMatchers(USUARIO_ENDPOINTS).hasAuthority(Perfil.USUARIO.toString())
+                        .requestMatchers(HttpMethod.POST,"/usuarios/**").permitAll()
                         .anyRequest().permitAll()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
