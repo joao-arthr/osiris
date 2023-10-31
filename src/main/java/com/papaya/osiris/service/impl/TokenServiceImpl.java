@@ -19,7 +19,6 @@ public class TokenServiceImpl implements TokenService {
     @Value("${jwt.secret}")
     private String secret;
 
-
     @Override
     public String gerarToken(Usuario usuario) throws JWTCreationException {
         return JWT.create()

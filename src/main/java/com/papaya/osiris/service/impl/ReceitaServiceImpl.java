@@ -9,9 +9,9 @@ import com.papaya.osiris.service.ReceitaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -37,15 +37,18 @@ public class ReceitaServiceImpl implements ReceitaService {
     }
 
     @Override
-    public ReceitaResponseDTO criarReceita(ReceitaRequestDTO receitaRequest) {
-        return new ReceitaResponseDTO(receitaRepository.save(new Receita(receitaRequest)));
+    public ReceitaResponseDTO criarReceita(ReceitaRequestDTO receitaRequest, String url) {
+        var receita = new Receita(receitaRequest);
+        receita.setImagem(url);
+        return new ReceitaResponseDTO(receitaRepository.save(receita));
     }
 
     @Override
-    public ReceitaResponseDTO atualizarReceita(String id, ReceitaRequestDTO receitaRequest) {
+    public ReceitaResponseDTO atualizarReceita(String id, ReceitaRequestDTO receitaRequest, String url) {
         Receita receitaExistente = receitaRepository.findById(id)
                 .orElseThrow(() -> new ReceitaNotFoundException(id));
         BeanUtils.copyProperties(receitaRequest, receitaExistente);
+        receitaExistente.setImagem(url);
         return new ReceitaResponseDTO(receitaRepository.save(receitaExistente));
     }
 
