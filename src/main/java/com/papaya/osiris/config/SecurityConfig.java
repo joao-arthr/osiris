@@ -32,9 +32,11 @@ public class SecurityConfig {
         return httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(HttpMethod.POST,"/usuarios/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/pancs/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/receitas/**").permitAll()
                         .requestMatchers("/pancs").hasAuthority(Perfil.ADMIN.toString())
                         .requestMatchers(USUARIO_ENDPOINTS).hasAuthority(Perfil.USUARIO.toString())
-                        .requestMatchers(HttpMethod.POST,"/usuarios/**").permitAll()
                         .anyRequest().permitAll()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
