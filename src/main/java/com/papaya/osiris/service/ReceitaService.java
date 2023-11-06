@@ -12,7 +12,9 @@ import java.util.Optional;
 public interface ReceitaService {
     List<ReceitaResponseDTO> listarTodasReceitas();
     ReceitaResponseDTO encontrarReceitaPorId(String id);
-    ReceitaResponseDTO criarReceita(ReceitaRequestDTO receitaRequest, String url);
-    ReceitaResponseDTO atualizarReceita(String id, ReceitaRequestDTO novaReceita, String url);
+    ReceitaResponseDTO criarReceita(ReceitaRequestDTO receitaRequest);
+    ReceitaResponseDTO atualizarReceita(String id, ReceitaRequestDTO novaReceita);
     void deletarReceita(String id);
+
+    ReceitaResponseDTO salvarImagem(String id, String url);
 }

@@ -2,6 +2,7 @@ package com.papaya.osiris.service.impl;
 import com.papaya.osiris.dto.request.ReceitaRequestDTO;
 import com.papaya.osiris.dto.response.ReceitaResponseDTO;
 import com.papaya.osiris.entity.Receita;
+import com.papaya.osiris.exception.PancNotFoundException;
 import com.papaya.osiris.exception.ReceitaNotFoundException;
 import com.papaya.osiris.exception.UsuarioNotFoundException;
 import com.papaya.osiris.repository.ReceitaRepository;
@@ -9,7 +10,6 @@ import com.papaya.osiris.service.ReceitaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -37,24 +37,29 @@ public class ReceitaServiceImpl implements ReceitaService {
     }
 
     @Override
-    public ReceitaResponseDTO criarReceita(ReceitaRequestDTO receitaRequest, String url) {
-        var receita = new Receita(receitaRequest);
-        receita.setImagem(url);
-        return new ReceitaResponseDTO(receitaRepository.save(receita));
+    public ReceitaResponseDTO criarReceita(ReceitaRequestDTO receitaRequest){
+        return new ReceitaResponseDTO(receitaRepository.save(new Receita(receitaRequest)));
     }
 
     @Override
-    public ReceitaResponseDTO atualizarReceita(String id, ReceitaRequestDTO receitaRequest, String url) {
+    public ReceitaResponseDTO atualizarReceita(String id, ReceitaRequestDTO receitaRequest) {
         Receita receitaExistente = receitaRepository.findById(id)
                 .orElseThrow(() -> new ReceitaNotFoundException(id));
         BeanUtils.copyProperties(receitaRequest, receitaExistente);
-        receitaExistente.setImagem(url);
         return new ReceitaResponseDTO(receitaRepository.save(receitaExistente));
     }
 
     @Override
     public void deletarReceita(String id) {
         receitaRepository.deleteById(id);
+    }
+
+    @Override
+    public ReceitaResponseDTO salvarImagem(String id, String url){
+        Receita receitaExistente = receitaRepository.findById(id)
+                .orElseThrow(() -> new PancNotFoundException(id));
+        receitaExistente.setImagem(url);
+        return new ReceitaResponseDTO(receitaRepository.save(receitaExistente));
     }
 }
 

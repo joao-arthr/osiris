@@ -18,20 +18,14 @@ import java.util.List;
 @RequestMapping("/receitas")
 @RequiredArgsConstructor
 public class ReceitaController {
-    private final FileUploadService fIleUploadService;
+    private final FileUploadService fileUploadService;
     private final ReceitaService receitaService;
 
     @PostMapping
     public ResponseEntity<ReceitaResponseDTO> criarReceita(
-            @RequestBody ReceitaRequestDTO receitaRequest,
-            @RequestParam("imagem")MultipartFile multipartFile) {
-        try {
-            String imgUrl = fIleUploadService.uploadFile(multipartFile);
-            ReceitaResponseDTO receitaResponse = receitaService.criarReceita(receitaRequest, imgUrl);
+            @RequestBody ReceitaRequestDTO receitaRequest) {
+            ReceitaResponseDTO receitaResponse = receitaService.criarReceita(receitaRequest);
             return new ResponseEntity<>(receitaResponse, HttpStatus.CREATED);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @GetMapping
@@ -50,25 +44,28 @@ public class ReceitaController {
     public ResponseEntity<ReceitaResponseDTO> atualizarReceita(
             @PathVariable String id,
             @RequestBody ReceitaRequestDTO receitaRequest,
-            @RequestParam("imagem") MultipartFile multipartFile) {
-
-        if(fIleUploadService.isMultipartFileEmpty(multipartFile)){
-            ReceitaResponseDTO receitaResponse = receitaService.atualizarReceita(id, receitaRequest, receitaRequest.imagem());
-            return new ResponseEntity<>(receitaResponse, HttpStatus.OK);
-        }
-        try {
-            String imgUrl = fIleUploadService.uploadFile(multipartFile);
-            ReceitaResponseDTO receitaResponse = receitaService.atualizarReceita(id, receitaRequest, imgUrl);
-            return new ResponseEntity<>(receitaResponse, HttpStatus.OK);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            @RequestPart("imagem") MultipartFile multipartFile) {
+        ReceitaResponseDTO receitaResponse = receitaService.atualizarReceita(id, receitaRequest);
+        return new ResponseEntity<>(receitaResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluirReceita(@PathVariable String id) {
         receitaService.deletarReceita(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/{id}/imagem")
+    public ResponseEntity<String> uploadImage(
+            @PathVariable String id,
+            @RequestPart("imagem") MultipartFile imagem) {
+        try {
+            String imgUrl = fileUploadService.uploadFile(imagem);
+            receitaService.salvarImagem(id, imgUrl);
+            return ResponseEntity.ok("Imagem enviada com sucesso");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

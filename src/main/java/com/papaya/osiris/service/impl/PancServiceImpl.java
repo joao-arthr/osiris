@@ -14,23 +14,20 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public abstract class PancServiceImpl implements PancService {
+public class PancServiceImpl implements PancService {
 
     private final PancRepository pancRepository;
 
     @Override
-    public PancResponseDTO criarPanc(PancRequestDTO pancRequest, String url) {
-        var panc = new Panc(pancRequest);
-        panc.setImagem(url);
-        return new PancResponseDTO(pancRepository.save(panc));
+    public PancResponseDTO criarPanc(PancRequestDTO pancRequest) {
+        return new PancResponseDTO(pancRepository.save(new Panc(pancRequest)));
     }
 
     @Override
-    public PancResponseDTO atualizarPanc(String id, PancRequestDTO pancRequest, String url) {
+    public PancResponseDTO atualizarPanc(String id, PancRequestDTO pancRequest) {
         Panc pancExistente = pancRepository.findById(id)
                 .orElseThrow(() -> new PancNotFoundException(id));
         BeanUtils.copyProperties(pancRequest, pancExistente);
-        pancExistente.setImagem(url);
         return new PancResponseDTO(pancRepository.save(pancExistente));
     }
 
@@ -52,6 +49,14 @@ public abstract class PancServiceImpl implements PancService {
     @Override
     public void excluirPancPorId(String id) {
         pancRepository.deleteById(id);
+    }
+
+    @Override
+    public PancResponseDTO salvarImagem(String id, String url){
+        Panc pancExistente = pancRepository.findById(id)
+                .orElseThrow(() -> new PancNotFoundException(id));
+        pancExistente.setImagem(url);
+        return new PancResponseDTO(pancRepository.save(pancExistente));
     }
 }
 

@@ -24,15 +24,9 @@ public class PancController {
 
     @PostMapping
     public ResponseEntity<PancResponseDTO> criarPanc(
-            @RequestBody PancRequestDTO pancRequest,
-            @RequestParam("imagem")MultipartFile multipartFile) {
-        try {
-            String url = fileUploadService.uploadFile(multipartFile);
-            PancResponseDTO pancResponse = pancService.criarPanc(pancRequest, url);
+            @RequestBody PancRequestDTO pancRequest) {
+            PancResponseDTO pancResponse = pancService.criarPanc(pancRequest);
             return new ResponseEntity<>(pancResponse, HttpStatus.CREATED);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @GetMapping
@@ -50,20 +44,9 @@ public class PancController {
     @PutMapping("/{id}")
     public ResponseEntity<PancResponseDTO> atualizarPanc(
             @PathVariable String id,
-            @RequestBody PancRequestDTO pancRequest,
-            @RequestParam("imagem") MultipartFile multipartFile) {
-
-        if (fileUploadService.isMultipartFileEmpty(multipartFile)) {
-            PancResponseDTO pancResponse = pancService.atualizarPanc(id, pancRequest, pancRequest.imagem());
-            return new ResponseEntity<>(pancResponse, HttpStatus.OK);
-        }
-        try {
-            String imgUrl = fileUploadService.uploadFile(multipartFile);
-            PancResponseDTO pancResponse = pancService.atualizarPanc(id, pancRequest, imgUrl);
-            return new ResponseEntity<>(pancResponse, HttpStatus.OK);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            @RequestBody PancRequestDTO pancRequest) {
+        PancResponseDTO pancResponse = pancService.atualizarPanc(id, pancRequest);
+        return new ResponseEntity<>(pancResponse, HttpStatus.OK);
     }
 
 
@@ -71,6 +54,19 @@ public class PancController {
     public ResponseEntity<Void> excluirPanc(@PathVariable String id) {
         pancService.excluirPancPorId(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/{id}/imagem")
+    public ResponseEntity<String> uploadImage(
+            @PathVariable String id,
+            @RequestPart("imagem") MultipartFile imagem) {
+        try {
+            String imgUrl = fileUploadService.uploadFile(imagem);
+            pancService.salvarImagem(id, imgUrl);
+            return ResponseEntity.ok("Imagem enviada com sucesso");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 
