@@ -9,6 +9,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,7 +20,7 @@ public class Panc {
     private String id;
     private String nome;
     private String descricao;
-    private String cultivo;
+    private List<String> cultivo;
     private String imagem;
 
     public Panc(PancRequestDTO pancRequest) {

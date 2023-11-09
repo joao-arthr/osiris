@@ -74,5 +74,6 @@ public class UsuarioServiceImpl implements UsuarioService {
                 .map(UsuarioResponseDTO::new)
                 .toList();
     }
+
 }
 

@@ -2,11 +2,13 @@ package com.papaya.osiris.dto.response;
 
 import com.papaya.osiris.entity.Panc;
 
+import java.util.List;
+
 public record PancResponseDTO(
         String id,
         String nome,
         String descricao,
-        String cultivo,
+        List<String> cultivo,
         String imagem
 ) {
     public PancResponseDTO(Panc panc) {

@@ -7,6 +7,7 @@ import com.papaya.osiris.exception.ReceitaNotFoundException;
 import com.papaya.osiris.exception.UsuarioNotFoundException;
 import com.papaya.osiris.repository.ReceitaRepository;
 import com.papaya.osiris.service.ReceitaService;
+import com.papaya.osiris.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ReceitaServiceImpl implements ReceitaService {
+    private final UsuarioService usuarioService;
     private final ReceitaRepository receitaRepository;
 
     @Override
