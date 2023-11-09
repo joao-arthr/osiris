@@ -19,7 +19,7 @@ public class Receita {
     @Id
     private String id;
     private String nome;
-    private List<Panc> pancs;
+    private List<String> pancs;
     private List<String> ingredientes;
     private List<String> preparo;
     private String imagem;

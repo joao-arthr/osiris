@@ -17,4 +17,6 @@ public interface ReceitaService {
     void deletarReceita(String id);
 
     ReceitaResponseDTO salvarImagem(String id, String url);
+
+    List<ReceitaResponseDTO> encontrarReitaPorUsuarioId(String id);
 }

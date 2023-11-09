@@ -11,5 +11,7 @@ public interface UsuarioService {
     void excluirUsuario(String id);
     UsuarioResponseDTO buscarUsuarioPorId(String id);
     List<UsuarioResponseDTO> listarTodosUsuarios();
+
+    UsuarioResponseDTO salvarImagem(String id, String url);
 }
 

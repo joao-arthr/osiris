@@ -9,7 +9,7 @@ import java.util.List;
 public record ReceitaResponseDTO(
         String id,
         String nome,
-        List<Panc> pancs,
+        List<String> pancs,
         List<String> ingredientes,
         List<String> preparo,
         String imagem,

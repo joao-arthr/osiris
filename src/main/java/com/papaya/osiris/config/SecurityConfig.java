@@ -32,6 +32,7 @@ public class SecurityConfig {
         return httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/login/**").permitAll()
                         .requestMatchers(HttpMethod.POST,"/usuarios/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/pancs/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/receitas/**").permitAll()

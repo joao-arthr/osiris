@@ -63,5 +63,16 @@ public class ReceitaServiceImpl implements ReceitaService {
         receitaExistente.setImagem(url);
         return new ReceitaResponseDTO(receitaRepository.save(receitaExistente));
     }
+
+    @Override
+    public List<ReceitaResponseDTO> encontrarReitaPorUsuarioId(String id){
+        var response = receitaRepository.findByUsuarioId(id);
+        if (response.isEmpty()) {
+            throw new UsuarioNotFoundException("Nenhuma receita encontrada");
+        }
+        return response.stream()
+                .map(ReceitaResponseDTO::fromReceita)
+                .toList();
+    }
 }
 

@@ -4,8 +4,8 @@ import com.papaya.osiris.dto.request.UsuarioRequestDTO;
 import com.papaya.osiris.dto.response.UsuarioResponseDTO;
 import com.papaya.osiris.entity.Assinatura;
 import com.papaya.osiris.entity.Usuario;
-import com.papaya.osiris.enums.Perfil;
 import com.papaya.osiris.exception.EmailDuplicadoException;
+import com.papaya.osiris.exception.PancNotFoundException;
 import com.papaya.osiris.exception.UsuarioNotFoundException;
 import com.papaya.osiris.repository.UsuarioRepository;
 import com.papaya.osiris.service.UsuarioService;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -73,6 +72,14 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarios.stream()
                 .map(UsuarioResponseDTO::new)
                 .toList();
+    }
+
+    @Override
+    public UsuarioResponseDTO salvarImagem(String id, String url){
+        Usuario usuarioExistente = usuarioRepository.findById(id)
+                .orElseThrow(() -> new PancNotFoundException(id));
+        usuarioExistente.setImagem(url);
+        return new UsuarioResponseDTO(usuarioRepository.save(usuarioExistente));
     }
 
 }

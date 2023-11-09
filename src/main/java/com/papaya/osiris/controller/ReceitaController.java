@@ -67,5 +67,11 @@ public class ReceitaController {
             throw new RuntimeException(e);
         }
     }
+
+    @GetMapping("/usuario/{id}")
+    public ResponseEntity<List<ReceitaResponseDTO>> listarReceitasPorUsuario(@PathVariable String id){
+        List<ReceitaResponseDTO> receitaResponses = receitaService.encontrarReitaPorUsuarioId(id);
+        return new ResponseEntity<>(receitaResponses, HttpStatus.OK);
+    }
 }
 
