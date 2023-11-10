@@ -19,6 +19,7 @@ public class Receita {
     @Id
     private String id;
     private String nome;
+    private String descricao;
     private List<String> pancs;
     private List<String> ingredientes;
     private List<String> preparo;
@@ -27,6 +28,7 @@ public class Receita {
 
     public Receita(ReceitaRequestDTO receitaRequest) {
         this.nome = receitaRequest.nome();
+        this.descricao = receitaRequest.descricao();
         this.pancs = receitaRequest.pancs();
         this.ingredientes = receitaRequest.ingredientes();
         this.preparo = receitaRequest.preparo();

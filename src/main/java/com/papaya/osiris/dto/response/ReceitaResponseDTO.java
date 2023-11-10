@@ -9,6 +9,7 @@ import java.util.List;
 public record ReceitaResponseDTO(
         String id,
         String nome,
+        String descricao,
         List<String> pancs,
         List<String> ingredientes,
         List<String> preparo,
@@ -18,6 +19,7 @@ public record ReceitaResponseDTO(
     public ReceitaResponseDTO(Receita receita) {
         this(receita.getId(),
                 receita.getNome(),
+                receita.getDescricao(),
                 receita.getPancs(),
                 receita.getIngredientes(),
                 receita.getPreparo(),
@@ -30,6 +32,7 @@ public record ReceitaResponseDTO(
         return new ReceitaResponseDTO(
                 receita.getId(),
                 receita.getNome(),
+                receita.getDescricao(),
                 receita.getPancs(),
                 receita.getIngredientes(),
                 receita.getPreparo(),
