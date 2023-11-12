@@ -43,8 +43,7 @@ public class ReceitaController {
     @PutMapping("/{id}")
     public ResponseEntity<ReceitaResponseDTO> atualizarReceita(
             @PathVariable String id,
-            @RequestBody ReceitaRequestDTO receitaRequest,
-            @RequestPart("imagem") MultipartFile multipartFile) {
+            @RequestBody ReceitaRequestDTO receitaRequest) {
         ReceitaResponseDTO receitaResponse = receitaService.atualizarReceita(id, receitaRequest);
         return new ResponseEntity<>(receitaResponse, HttpStatus.OK);
     }
@@ -55,7 +54,7 @@ public class ReceitaController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/{id}/imagem")
+    @PatchMapping("/{id}/imagem")
     public ResponseEntity<String> uploadImage(
             @PathVariable String id,
             @RequestPart("imagem") MultipartFile imagem) {

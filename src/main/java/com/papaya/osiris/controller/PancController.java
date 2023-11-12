@@ -56,7 +56,7 @@ public class PancController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/{id}/imagem")
+    @PatchMapping("/{id}/imagem")
     public ResponseEntity<String> uploadImage(
             @PathVariable String id,
             @RequestPart("imagem") MultipartFile imagem) {
