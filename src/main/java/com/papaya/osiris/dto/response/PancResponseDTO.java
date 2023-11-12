@@ -9,6 +9,7 @@ public record PancResponseDTO(
         String nome,
         String descricao,
         List<String> cultivo,
+        String beneficios,
         String imagem
 ) {
     public PancResponseDTO(Panc panc) {
@@ -16,6 +17,7 @@ public record PancResponseDTO(
                 panc.getNome(),
                 panc.getDescricao(),
                 panc.getCultivo(),
+                panc.getBeneficios(),
                 panc.getImagem()
         );
     }

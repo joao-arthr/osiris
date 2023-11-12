@@ -21,12 +21,14 @@ public class Panc {
     private String nome;
     private String descricao;
     private List<String> cultivo;
+    private String beneficios;
     private String imagem;
 
     public Panc(PancRequestDTO pancRequest) {
         this.nome = pancRequest.nome();
         this.descricao = pancRequest.descricao();
         this.cultivo = pancRequest.cultivo();
+        this.beneficios = pancRequest.beneficios();
         this.imagem = pancRequest.imagem();
     }
 }
