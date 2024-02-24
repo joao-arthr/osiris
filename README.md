@@ -1,13 +1,24 @@
-
 <p align="center">
    <img src="https://github.com/davitorress/Osiris-app/assets/104948713/5dfe90f9-43a4-442d-b499-04a74b9bfc0a" width="500">
 </p>
 
-# Documentação da Osiris API
+<div align="center">
+   
+   ![GitHub language count](https://img.shields.io/github/languages/count/joao-arthr/osiris)
+   ![GitHub last commit](https://img.shields.io/github/last-commit/joao-arthr/osiris)
+
+</div>
 
 Osiris é um projeto de graduação em andamento que promove uma alimentação mais saudável por meio do uso de Plantas Alimentícias Não Convencionais (PANCs). Ele fornece informações de cultivo, diversas receitas e PANCs e permite que os usuários criem suas próprias receitas. Esta documentação descreve como utilizar a Osiris API.
 
+---
+
+&nbsp;
+
+# Documentação da Osiris API
+
 **Tecnologias utilizadas:**
+
 <p align="left">
     <img src="https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot">
     <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white">
@@ -15,7 +26,7 @@ Osiris é um projeto de graduação em andamento que promove uma alimentação m
 
 **Versão da API:** 0.5
 
-&nbsp;
+---
 
 ## Entidades
 
@@ -34,14 +45,14 @@ Osiris é um projeto de graduação em andamento que promove uma alimentação m
 }
 ```
 
-- ```id```: ID do Mongo que identifica a PANC
-- ```nome```: Nome da PANC
-- ```descricao```: Descrição geral da PANC
-- ```cultivo```: Informações de cultivo da PANC
-- ```beneficios```: Benefícios da PANC
-- ```imagem```: Imagem da PANC
+- `id`: ID do Mongo que identifica a PANC
+- `nome`: Nome da PANC
+- `descricao`: Descrição geral da PANC
+- `cultivo`: Informações de cultivo da PANC
+- `beneficios`: Benefícios da PANC
+- `imagem`: Imagem da PANC
 
-___
+---
 
 ### Receitas
 
@@ -65,31 +76,34 @@ ___
 }
 ```
 
-- ```id```: ID do Mongo que identifica a receita
-- ```nome```: Nome da receita
-- ```descricao```: Descrição geral da receita
-- ```pancs```: PANCs que estão contidas na receita
-- ```ingredientes```: Lista de ingredientes da receita
-- ```preparo```: Informações de preparo da receita
-- ```imagem```: Imagem da receita
-- ```usuarioId```: ID do usuário que criou a receita
+- `id`: ID do Mongo que identifica a receita
+- `nome`: Nome da receita
+- `descricao`: Descrição geral da receita
+- `pancs`: PANCs que estão contidas na receita
+- `ingredientes`: Lista de ingredientes da receita
+- `preparo`: Informações de preparo da receita
+- `imagem`: Imagem da receita
+- `usuarioId`: ID do usuário que criou a receita
 
 &nbsp;
 
 ## Endpoints
 
 ### Login
+
 &nbsp;
 
-### **POST** ```/login```
+### **POST** `/login`
+
 Endpoint para efetuar o login do usuário comum.
 
 **Parameters**
 
-- **body** 
+- **body**
 
-- ```email```: sem validação
-- ```senha```: sem validação
+- `email`: sem validação
+- `senha`: sem validação
+
 ```java
 {
     "email": "string",
@@ -100,6 +114,7 @@ Endpoint para efetuar o login do usuário comum.
 **Responses**
 
 - **200** - Retorna o token de autenticação do usuário
+
 ```java
 {
     "token": "string"
@@ -109,24 +124,28 @@ Endpoint para efetuar o login do usuário comum.
 - **400** - Requisição inconsistente
 
 - **403**
-```
-Usuario Admin não encontrado. ID: {id} 
-```
-___
 
+```
+Usuario Admin não encontrado. ID: {id}
+```
+
+---
 
 &nbsp;
 &nbsp;
 
 ### PANCs
+
 &nbsp;
 
-### **GET** ```/pancs```
+### **GET** `/pancs`
+
 Endpoint para obter todas as PANCs cadastradas.
 
 **Responses**
 
 - **200** - Retorna um array de PANCs
+
 ```java
 [
     {
@@ -142,19 +161,22 @@ Endpoint para obter todas as PANCs cadastradas.
 ]
 ```
 
-___
+---
+
 &nbsp;
 
-### **GET** ```/pancs/{id}```
+### **GET** `/pancs/{id}`
+
 Endpoint para obter uma única PANC pelo ID.
 
 **Parameters**
 
-- **id**: ```String``` - ID da PANC a ser encontrada
+- **id**: `String` - ID da PANC a ser encontrada
 
 **Responses**
 
 - **200** - retorna o objeto da PANC
+
 ```java
 {
     "id": "string",
@@ -169,23 +191,28 @@ Endpoint para obter uma única PANC pelo ID.
 ```
 
 - **404**
+
 ```
 Panc não encontrada. ID: {id}
 ```
 
-___
+---
+
 &nbsp;
 &nbsp;
 
 ### Receitas
+
 &nbsp;
 
-### **GET** ```/receitas```
+### **GET** `/receitas`
+
 Endpoint para obter todas as receitas cadastradas no sistema.
 
 **Responses**
 
 - **200** - Retorna um array de receitas
+
 ```java
 [
     {
@@ -207,20 +234,22 @@ Endpoint para obter todas as receitas cadastradas no sistema.
 ]
 ```
 
-___
+---
+
 &nbsp;
 
+### **GET** `/receitas/{id}`
 
-### **GET** ```/receitas/{id}```
 Endpoint para obter uma única receita pelo ID.
 
 **Parameters**
 
-- **id**: ```String``` - ID da receita a ser encontrada
+- **id**: `String` - ID da receita a ser encontrada
 
 **Responses**
 
 - **200** - Retorna o objeto da receita
+
 ```java
 {
     "id": "string",
@@ -241,19 +270,23 @@ Endpoint para obter uma única receita pelo ID.
 ```
 
 - **404**
+
 ```
 Receita não encontrada. ID: {id}
 ```
-___
+
+---
+
 &nbsp;
 
+### **POST** `/receitas`
 
-### **POST** ```/receitas```
 Endpoint para cadastrar uma receita.
 
 **Parameters**
 
 - **body** - Receita a ser cadastrada
+
 ```java
 {
     "id": "string",
@@ -279,18 +312,20 @@ Endpoint para cadastrar uma receita.
 
 - **400** - Requisição inconsistente
 
-___
+---
+
 &nbsp;
 
+### **PUT** `/receitas/{id}`
 
-### **PUT** ```/receitas/{id}```
 Endpoint para atualizar uma receita pelo ID.
 
 **Parameters**
 
-- **id**: ```String``` - ID da receita a ser editada
+- **id**: `String` - ID da receita a ser editada
 
 - **body** - Receita a ser editada
+
 ```java
 {
     "id": "string",
@@ -317,24 +352,27 @@ Endpoint para atualizar uma receita pelo ID.
 - **400** - Requisição inconsistente
 
 - **404**
+
 ```
 Receita não encontrada. ID: {id}
 ```
 
-___
+---
+
 &nbsp;
 
+### **PATCH** `/receitas/{id}/imagem`
 
-### **PATCH** ```/receitas/{id}/imagem```
 Endpoint para mudar a imagem de uma receita pelo ID.
 
 **Parameters**
 
-- **id**: ```String``` - ID da receita da qual a imagem será salva
+- **id**: `String` - ID da receita da qual a imagem será salva
 
 **Responses**
 
 - **200**
+
 ```
 Imagem enviada com sucesso
 ```
@@ -342,20 +380,22 @@ Imagem enviada com sucesso
 - **400** - Requisição inconsistente
 
 - **404**
+
 ```
 Receita não encontrada. ID: {id}
 ```
 
-___
+---
+
 &nbsp;
 
+### **DELETE** `/receitas/{id}`
 
-### **DELETE** ```/receitas/{id}```
 Endpoint para excluir uma receita pelo ID.
 
 **Parameters**
 
-- **id**: ```String``` - ID da PANC a ser encontrada
+- **id**: `String` - ID da PANC a ser encontrada
 
 **Responses**
 
