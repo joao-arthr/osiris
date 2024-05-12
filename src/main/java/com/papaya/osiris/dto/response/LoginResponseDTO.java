@@ -1,4 +1,4 @@
 package com.papaya.osiris.dto.response;
 
-public record LoginResponseDTO(String token) {
+public record LoginResponseDTO(String idUsuario, String token) {
 }
