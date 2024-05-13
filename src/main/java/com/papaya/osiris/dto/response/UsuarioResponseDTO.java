@@ -12,7 +12,6 @@ public record UsuarioResponseDTO(
         String email,
         List<String> pancsFavoritasId,
         List<String> receitasSalvasId,
-        Perfil perfil,
         AssinaturaDTO assinatura,
         String imagem
         ) {
@@ -23,7 +22,6 @@ public record UsuarioResponseDTO(
                 usuario.getEmail(),
                 usuario.getPancsFavoritasId(),
                 usuario.getReceitasSalvasId(),
-                usuario.getPerfil(),
                 new AssinaturaDTO(usuario.getAssinatura()),
                 usuario.getImagem()
         );

@@ -11,7 +11,6 @@ public record UsuarioRequestDTO(
         String senha,
         List<String> pancsFavoritasId,
         List<String> receitasSalvasId,
-        Perfil perfil,
         AssinaturaDTO assinatura,
         String imagem
 ) {}

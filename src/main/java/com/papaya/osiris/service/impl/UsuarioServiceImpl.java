@@ -36,7 +36,6 @@ public class UsuarioServiceImpl implements UsuarioService {
                     new BCryptPasswordEncoder().encode(usuarioRequest.senha()),
                     Collections.emptyList(),
                     Collections.emptyList(),
-                    usuarioRequest.perfil(),
                     new Assinatura(),
                     usuarioRequest.imagem())
             ));

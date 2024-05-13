@@ -2,7 +2,6 @@ package com.papaya.osiris.entity;
 
 import com.papaya.osiris.dto.request.LoginRequestDTO;
 import com.papaya.osiris.dto.request.UsuarioRequestDTO;
-import com.papaya.osiris.enums.Perfil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,7 +26,6 @@ public class Usuario implements UserDetails {
     private String senha;
     private List<String> pancsFavoritasId;
     private List<String> receitasSalvasId;
-    private Perfil perfil;
     private Assinatura assinatura;
     private String imagem;
 
@@ -37,16 +35,14 @@ public class Usuario implements UserDetails {
             String senha,
             List<String> pancsFavoritasId,
             List<String> receitasSalvasId,
-            Perfil perfil,
             Assinatura assinatura,
             String imagem
-            ) {
+    ) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.pancsFavoritasId = pancsFavoritasId;
         this.receitasSalvasId = receitasSalvasId;
-        this.perfil = perfil;
         this.assinatura = assinatura;
         this.imagem = imagem;
     }
@@ -68,7 +64,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(getPerfil().toString()));
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override

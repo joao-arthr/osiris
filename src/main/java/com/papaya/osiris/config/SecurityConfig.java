@@ -27,6 +27,7 @@ public class SecurityConfig {
             "/usuarios/**",
             "/receitas/**"
     };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf(AbstractHttpConfigurer::disable)
@@ -36,8 +37,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/usuarios/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/pancs/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/receitas/**").permitAll()
-                        .requestMatchers("/pancs").hasAuthority(Perfil.ADMIN.toString())
-                        .requestMatchers(USUARIO_ENDPOINTS).hasAuthority(Perfil.USUARIO.toString())
+                        .requestMatchers("/pancs").permitAll()
                         .anyRequest().permitAll()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
