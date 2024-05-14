@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -42,7 +43,7 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UsuarioResponseDTO> atualizarUsuario(@PathVariable String id, @RequestBody UsuarioRequestDTO usuarioRequest) {
-        UsuarioResponseDTO usuarioResponse = usuarioService.atualizarUsuario(id, usuarioRequest);
+        UsuarioResponseDTO usuarioResponse = usuarioService.substituirUsuario(id, usuarioRequest);
         return new ResponseEntity<>(usuarioResponse, HttpStatus.OK);
     }
 
@@ -52,7 +53,7 @@ public class UsuarioController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/{id}/imagem")
+    @PatchMapping("/{id}/imagem")
     public ResponseEntity<String> uploadImage(
             @PathVariable String id,
             @RequestPart("imagem") MultipartFile imagem) {
@@ -63,6 +64,12 @@ public class UsuarioController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<UsuarioResponseDTO> updateUsuario(@PathVariable String id, @RequestBody Map<String, Object> usuarioRequest) {
+        UsuarioResponseDTO usuarioResponse = usuarioService.atualizarUsuario(id, usuarioRequest);
+        return new ResponseEntity<>(usuarioResponse, HttpStatus.OK);
     }
 }
 
