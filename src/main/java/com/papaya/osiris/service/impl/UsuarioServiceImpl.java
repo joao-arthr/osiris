@@ -48,6 +48,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario usuarioExistente = usuarioRepository.findById(id)
                 .orElseThrow(() -> new UsuarioNotFoundException(id));
         BeanUtils.copyProperties(usuarioRequest, usuarioExistente);
+        usuarioExistente.setAssinatura(new Assinatura(false,null,null));
         return new UsuarioResponseDTO(usuarioRepository.save(usuarioExistente));
     }
 
