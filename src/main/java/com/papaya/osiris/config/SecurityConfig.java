@@ -1,7 +1,5 @@
 package com.papaya.osiris.config;
 
-import com.papaya.osiris.enums.Perfil;
-import com.papaya.osiris.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

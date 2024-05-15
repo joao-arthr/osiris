@@ -1,7 +1,6 @@
 package com.papaya.osiris.dto.request;
 
 import com.papaya.osiris.dto.AssinaturaDTO;
-import com.papaya.osiris.enums.Perfil;
 
 import java.util.List;
 

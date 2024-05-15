@@ -2,7 +2,6 @@ package com.papaya.osiris.dto.response;
 
 import com.papaya.osiris.dto.AssinaturaDTO;
 import com.papaya.osiris.entity.Usuario;
-import com.papaya.osiris.enums.Perfil;
 
 import java.util.List;
 

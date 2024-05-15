@@ -87,7 +87,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                 .orElseThrow(() -> new PancNotFoundException(id));
         Set<String> camposNaoEditaveis = Set.of("id","assinatura", "imagem");
         usuarioRequest.forEach((key,value) ->{
-            if (!camposNaoEditaveis.contains(key)) {
+             if (!camposNaoEditaveis.contains(key)) {
                 try {
                     Field field = Usuario.class.getDeclaredField(key);
                     field.setAccessible(true);
