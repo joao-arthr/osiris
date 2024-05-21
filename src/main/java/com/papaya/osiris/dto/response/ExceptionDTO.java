@@ -1,8 +1,8 @@
 package com.papaya.osiris.dto.response;
 
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 
 import java.time.LocalDateTime;
 
-public record ExceptionDTO(LocalDateTime timestamp, HttpStatus status, String message, String path) {
+public record ExceptionDTO(LocalDateTime timestamp, int status, String message, String path) {
 }
