@@ -55,13 +55,13 @@ public class ReceitaController {
     }
 
     @PatchMapping("/{id}/imagem")
-    public ResponseEntity<String> uploadImage(
+    public ResponseEntity<ReceitaResponseDTO> uploadImage(
             @PathVariable String id,
             @RequestPart("imagem") MultipartFile imagem) {
         try {
             String imgUrl = fileUploadService.uploadFile(imagem);
-            receitaService.salvarImagem(id, imgUrl);
-            return ResponseEntity.ok("Imagem enviada com sucesso");
+            ReceitaResponseDTO receitaResponse = receitaService.salvarImagem(id, imgUrl);
+                return new ResponseEntity<>(receitaResponse, HttpStatus.OK);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
