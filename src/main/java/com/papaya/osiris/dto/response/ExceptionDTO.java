@@ -4,5 +4,5 @@ import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
-public record ExceptionDTO(LocalDateTime timestamp, HttpStatus status, String menssagem, String path) {
+public record ExceptionDTO(LocalDateTime timestamp, HttpStatus status, String message, String path) {
 }
