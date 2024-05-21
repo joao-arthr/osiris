@@ -57,13 +57,13 @@ public class PancController {
     }
 
     @PatchMapping("/{id}/imagem")
-    public ResponseEntity<String> uploadImage(
+    public ResponseEntity<PancResponseDTO> uploadImage(
             @PathVariable String id,
             @RequestPart("imagem") MultipartFile imagem) {
         try {
             String imgUrl = fileUploadService.uploadFile(imagem);
-            pancService.salvarImagem(id, imgUrl);
-            return ResponseEntity.ok("Imagem enviada com sucesso");
+            PancResponseDTO pancResponse = pancService.salvarImagem(id, imgUrl);
+            return new ResponseEntity<>(pancResponse, HttpStatus.OK);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
