@@ -2,6 +2,7 @@ package com.papaya.osiris.controller;
 
 import com.papaya.osiris.dto.request.ReceitaRequestDTO;
 import com.papaya.osiris.dto.response.ReceitaResponseDTO;
+import com.papaya.osiris.dto.response.UsuarioResponseDTO;
 import com.papaya.osiris.service.FileUploadService;
 import com.papaya.osiris.service.ReceitaService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/receitas")
@@ -44,7 +46,7 @@ public class ReceitaController {
     public ResponseEntity<ReceitaResponseDTO> atualizarReceita(
             @PathVariable String id,
             @RequestBody ReceitaRequestDTO receitaRequest) {
-        ReceitaResponseDTO receitaResponse = receitaService.atualizarReceita(id, receitaRequest);
+        ReceitaResponseDTO receitaResponse = receitaService.substituirReceita(id, receitaRequest);
         return new ResponseEntity<>(receitaResponse, HttpStatus.OK);
     }
 
@@ -71,6 +73,12 @@ public class ReceitaController {
     public ResponseEntity<List<ReceitaResponseDTO>> listarReceitasPorUsuario(@PathVariable String id){
         List<ReceitaResponseDTO> receitaResponses = receitaService.encontrarReitaPorUsuarioId(id);
         return new ResponseEntity<>(receitaResponses, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<ReceitaResponseDTO> updateReceita(@PathVariable String id, @RequestBody Map<String, Object> receitaRequest) {
+        ReceitaResponseDTO receitaResponse = receitaService.atualizarReceita(id, receitaRequest);
+        return new ResponseEntity<>(receitaResponse, HttpStatus.OK);
     }
 }
 

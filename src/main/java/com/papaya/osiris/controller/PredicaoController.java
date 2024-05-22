@@ -13,8 +13,5 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/predicoes")
 @RequiredArgsConstructor
 public class PredicaoController {
-    @PostMapping
-    public ResponseEntity<PredicaoResponseDTO> enviarPredicao( @RequestPart("imagem") MultipartFile imagem){
 
-    }
 }

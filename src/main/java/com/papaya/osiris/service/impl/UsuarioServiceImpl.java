@@ -85,7 +85,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public UsuarioResponseDTO atualizarUsuario(String id, Map<String, Object> usuarioRequest) {
         Usuario usuarioExistente = usuarioRepository.findById(id)
-                .orElseThrow(() -> new PancNotFoundException(id));
+                .orElseThrow(() -> new UsuarioNotFoundException(id));
         Set<String> camposNaoEditaveis = Set.of("id","assinatura", "imagem");
         usuarioRequest.forEach((key,value) ->{
              if (!camposNaoEditaveis.contains(key)) {

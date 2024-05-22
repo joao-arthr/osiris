@@ -1,7 +1,9 @@
 package com.papaya.osiris.service.impl;
 import com.papaya.osiris.dto.request.ReceitaRequestDTO;
 import com.papaya.osiris.dto.response.ReceitaResponseDTO;
+import com.papaya.osiris.dto.response.UsuarioResponseDTO;
 import com.papaya.osiris.entity.Receita;
+import com.papaya.osiris.entity.Usuario;
 import com.papaya.osiris.exception.PancNotFoundException;
 import com.papaya.osiris.exception.ReceitaNotFoundException;
 import com.papaya.osiris.exception.UsuarioNotFoundException;
@@ -12,7 +14,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -44,7 +49,7 @@ public class ReceitaServiceImpl implements ReceitaService {
     }
 
     @Override
-    public ReceitaResponseDTO atualizarReceita(String id, ReceitaRequestDTO receitaRequest) {
+    public ReceitaResponseDTO substituirReceita(String id, ReceitaRequestDTO receitaRequest) {
         Receita receitaExistente = receitaRepository.findById(id)
                 .orElseThrow(() -> new ReceitaNotFoundException(id));
         BeanUtils.copyProperties(receitaRequest, receitaExistente);
@@ -73,6 +78,25 @@ public class ReceitaServiceImpl implements ReceitaService {
         return response.stream()
                 .map(ReceitaResponseDTO::fromReceita)
                 .toList();
+    }
+
+    @Override
+    public ReceitaResponseDTO atualizarReceita(String id, Map<String, Object> receitaRequest) {
+        Receita receitaExistente = receitaRepository.findById(id)
+                .orElseThrow(() -> new ReceitaNotFoundException(id));
+        Set<String> camposNaoEditaveis = Set.of("id","imagem", "usuarioId");
+        receitaRequest.forEach((key,value) ->{
+            if (!camposNaoEditaveis.contains(key)) {
+                try {
+                    Field field = Receita.class.getDeclaredField(key);
+                    field.setAccessible(true);
+                    field.set(receitaExistente, value);
+                } catch (NoSuchFieldException | IllegalAccessException e) {
+                    throw new IllegalArgumentException("Atributo " + key + " não é atualizável.", e);
+                }
+            }
+        });
+        return new ReceitaResponseDTO(receitaRepository.save(receitaExistente));
     }
 }
 

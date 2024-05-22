@@ -35,6 +35,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/usuarios/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/pancs/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/receitas/**").permitAll()
+                        .requestMatchers(HttpMethod.PATCH,"/receitas/**").permitAll()
                         .requestMatchers("/pancs").permitAll()
                         .anyRequest().permitAll()
                 )
