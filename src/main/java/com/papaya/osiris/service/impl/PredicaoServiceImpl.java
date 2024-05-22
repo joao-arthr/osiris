@@ -1,11 +1,9 @@
 package com.papaya.osiris.service.impl;
 
 import com.papaya.osiris.dto.request.PredicaoRequestDTO;
-import com.papaya.osiris.dto.response.PancResponseDTO;
 import com.papaya.osiris.dto.response.PredicaoResponseDTO;
 import com.papaya.osiris.entity.Predicao;
 import com.papaya.osiris.exception.PancNotFoundException;
-import com.papaya.osiris.repository.PancRepository;
 import com.papaya.osiris.repository.PredicaoRepository;
 import com.papaya.osiris.service.PredicaoService;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +15,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PredicaoServiceImpl implements PredicaoService {
     private final PredicaoRepository predicaoRepository;
+
     @Override
-    public PredicaoResponseDTO salvarPredicao(PredicaoRequestDTO requestDTO) {
-        return new PredicaoResponseDTO(predicaoRepository.save(new Predicao(requestDTO)));
+    public PredicaoResponseDTO salvarPredicao(Predicao predicao) {
+        return new PredicaoResponseDTO(predicaoRepository.save(predicao));
     }
 
     @Override

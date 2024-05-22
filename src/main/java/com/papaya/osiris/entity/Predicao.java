@@ -1,6 +1,7 @@
 package com.papaya.osiris.entity;
 
 import com.papaya.osiris.dto.request.PredicaoRequestDTO;
+import com.papaya.osiris.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class Predicao {
     private String classe;
     private BigDecimal acuracia;
     private LocalDateTime data;
+    private Status status;
 
     public Predicao(PredicaoRequestDTO predicaoRequestDTO){
         this.id = predicaoRequestDTO.id();
@@ -26,5 +28,12 @@ public class Predicao {
         this.classe = predicaoRequestDTO.classe();
         this.acuracia = predicaoRequestDTO.acuracia();
         this.data = predicaoRequestDTO.data();
+        this.status = predicaoRequestDTO.status();
+    }
+
+    public Predicao(String imagem, LocalDateTime data, Status status){
+        this.imagem = imagem;
+        this.data = data;
+        this.status = status;
     }
 }
