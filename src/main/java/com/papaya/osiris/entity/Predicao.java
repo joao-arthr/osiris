@@ -26,8 +26,10 @@ public class Predicao {
         this.imagem = predicaoRequestDTO.imagem();
     }
 
-    public Predicao(String imagem, LocalDateTime data, Status status){
+    public Predicao(String imagem, String classe, BigDecimal acuracia, LocalDateTime data, Status status){
         this.imagem = imagem;
+        this.classe = classe;
+        this.acuracia = acuracia;
         this.data = data;
         this.status = status;
     }
