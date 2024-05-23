@@ -21,11 +21,11 @@ public class PredicaoFacade {
     private final PredicaoService predicaoService;
     public PredicaoResponseDTO armazenarPredicao(MultipartFile imagem) throws IOException {
         String imgUrl = fileUploadService.uploadFile(imagem);
+        predicaoService.enviarPredicao(imgUrl);
         return predicaoService.salvarPredicao(new Predicao(
                 imgUrl,
                 LocalDateTime.now(),
                 Status.PROCESSANDO
         ));
-
     }
 }

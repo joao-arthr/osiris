@@ -23,12 +23,7 @@ public class Predicao {
     private Status status;
 
     public Predicao(PredicaoRequestDTO predicaoRequestDTO){
-        this.id = predicaoRequestDTO.id();
         this.imagem = predicaoRequestDTO.imagem();
-        this.classe = predicaoRequestDTO.classe();
-        this.acuracia = predicaoRequestDTO.acuracia();
-        this.data = predicaoRequestDTO.data();
-        this.status = predicaoRequestDTO.status();
     }
 
     public Predicao(String imagem, LocalDateTime data, Status status){
