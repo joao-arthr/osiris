@@ -71,5 +71,11 @@ public class UsuarioController {
         UsuarioResponseDTO usuarioResponse = usuarioService.atualizarUsuario(id, usuarioRequest);
         return new ResponseEntity<>(usuarioResponse, HttpStatus.OK);
     }
+
+    @PatchMapping("/{id}/assinatura")
+    public ResponseEntity<UsuarioResponseDTO> ativarAssinatura(@PathVariable String id){
+        UsuarioResponseDTO usuarioResponse = usuarioService.ativarAssinatura(id);
+        return new ResponseEntity<>(usuarioResponse, HttpStatus.CREATED);
+    }
 }
 

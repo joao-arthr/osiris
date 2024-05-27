@@ -28,7 +28,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain
     ) throws ServletException, IOException {
-        var token = recuperarToken(request);
+        var token = tokenService.recuperarToken(request);
         if(token != null){
             UserDetails usuario = usuarioRepository.findByEmail(tokenService.validarToken(token));
             SecurityContextHolder.getContext().setAuthentication(
@@ -37,9 +37,5 @@ public class SecurityFilter extends OncePerRequestFilter {
         filterChain.doFilter(request,response);
     }
 
-    private String recuperarToken(HttpServletRequest request){
-        var authHeader = request.getHeader("Authorization");
-        if (authHeader == null) return null;
-        return authHeader.replace("Bearer","");
-    }
+
 }

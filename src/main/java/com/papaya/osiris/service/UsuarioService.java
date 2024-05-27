@@ -14,5 +14,7 @@ public interface UsuarioService {
     List<UsuarioResponseDTO> listarTodosUsuarios();
     UsuarioResponseDTO salvarImagem(String id, String url);
     UsuarioResponseDTO atualizarUsuario(String id, Map<String, Object> usuarioRequest);
+
+    UsuarioResponseDTO ativarAssinatura(String usuarioId);
 }
 

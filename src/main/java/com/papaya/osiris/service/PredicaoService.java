@@ -10,6 +10,5 @@ import java.util.List;
 public interface PredicaoService {
     Mono<PredicaoResponseDTO> enviarPredicao(String imgUrl);
     PredicaoResponseDTO salvarPredicao(Predicao predicao);
-    PredicaoResponseDTO buscarPredicaoPorId(String id);
-    List<PredicaoResponseDTO> listarPredicoes();
+    List<PredicaoResponseDTO> buscarPredicaoPorUsuarioId(String usuarioId);
 }

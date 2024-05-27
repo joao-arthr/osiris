@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 public class PredicaoFacade {
     private final FileUploadService fileUploadService;
     private final PredicaoService predicaoService;
-    public Mono<PredicaoResponseDTO> armazenarPredicao(MultipartFile imagem) throws IOException {
+    public Mono<PredicaoResponseDTO> armazenarPredicao(MultipartFile imagem, String usuarioId) throws IOException {
         String imgUrl = fileUploadService.uploadFile(imagem);
         return predicaoService.enviarPredicao(imgUrl)
                 .flatMap(predicaoResponseDTO -> {
@@ -29,7 +29,8 @@ public class PredicaoFacade {
                             predicaoResponseDTO.classe(),
                             predicaoResponseDTO.acuracia(),
                             LocalDateTime.now(),
-                            Status.CONCLUIDA
+                            Status.CONCLUIDA,
+                            usuarioId
                     );
                     predicaoService.salvarPredicao(predicao);
                     return Mono.just(predicaoResponseDTO);

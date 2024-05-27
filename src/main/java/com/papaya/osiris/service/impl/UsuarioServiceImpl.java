@@ -10,10 +10,13 @@ import com.papaya.osiris.repository.UsuarioRepository;
 import com.papaya.osiris.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cglib.core.Local;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -99,6 +102,29 @@ public class UsuarioServiceImpl implements UsuarioService {
             }
         });
         return new UsuarioResponseDTO(usuarioRepository.save(usuarioExistente));
+    }
+
+    @Override
+    public UsuarioResponseDTO ativarAssinatura(String usuarioId) {
+        Usuario usuarioExistente = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new UsuarioNotFoundException(usuarioId));
+        Assinatura assinatura = new Assinatura(true, LocalDate.now(), LocalDate.now().plusDays(30));
+        usuarioExistente.setAssinatura(assinatura);
+        return new UsuarioResponseDTO(usuarioRepository.save(usuarioExistente));
+    }
+
+
+    @Scheduled(cron = "0 0 0 * * ?")
+    public void desativarAssinaturasExpiradas() {
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        List<Usuario> usuariosParaAtualizar = usuarios.stream()
+                .filter(usuario -> {
+                    Assinatura assinatura = usuario.getAssinatura();
+                    return assinatura != null && assinatura.isAtiva() && assinatura.getDataTermino().isBefore(LocalDate.now());
+                })
+                .peek(usuario -> usuario.getAssinatura().setAtiva(false))
+                .toList();
+        usuarioRepository.saveAll(usuariosParaAtualizar);
     }
 
 }

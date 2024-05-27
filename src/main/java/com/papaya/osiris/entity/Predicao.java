@@ -21,16 +21,18 @@ public class Predicao {
     private BigDecimal acuracia;
     private LocalDateTime data;
     private Status status;
+    private String usuarioId;
 
     public Predicao(PredicaoRequestDTO predicaoRequestDTO){
         this.imagem = predicaoRequestDTO.imagem();
     }
 
-    public Predicao(String imagem, String classe, BigDecimal acuracia, LocalDateTime data, Status status){
+    public Predicao(String imagem, String classe, BigDecimal acuracia, LocalDateTime data, Status status, String usuarioId){
         this.imagem = imagem;
         this.classe = classe;
         this.acuracia = acuracia;
         this.data = data;
         this.status = status;
+        this.usuarioId = usuarioId;
     }
 }

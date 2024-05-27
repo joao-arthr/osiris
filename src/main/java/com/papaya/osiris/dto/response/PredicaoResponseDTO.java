@@ -12,7 +12,8 @@ public record PredicaoResponseDTO(
         String classe,
         BigDecimal acuracia,
         LocalDateTime data,
-        Status status) {
+        Status status,
+        String usuarioId) {
 
     public PredicaoResponseDTO(Predicao predicao){
         this(predicao.getId(),
@@ -20,6 +21,7 @@ public record PredicaoResponseDTO(
                 predicao.getClasse(),
                 predicao.getAcuracia(),
                 predicao.getData(),
-                predicao.getStatus());
+                predicao.getStatus(),
+                predicao.getUsuarioId());
     }
 }
