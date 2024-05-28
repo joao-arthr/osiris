@@ -1,5 +1,6 @@
 package com.papaya.osiris.service.impl;
 
+import com.papaya.osiris.dto.request.PredicaoRequestDTO;
 import com.papaya.osiris.dto.response.PredicaoResponseDTO;
 import com.papaya.osiris.entity.Predicao;
 import com.papaya.osiris.repository.PredicaoRepository;
@@ -18,16 +19,17 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class PredicaoServiceImpl implements PredicaoService {
-    private final PredicaoRepository predicaoRepository;
+    private final  PredicaoRepository predicaoRepository;
     private final WebClient webClient;
+
     @Override
     public Mono<PredicaoResponseDTO> enviarPredicao(String imgUrl) {
-        MultiValueMap<String, String> parts = new LinkedMultiValueMap<>();
-        parts.add("imagem", imgUrl);
         return webClient.post()
-                .uri("/predict")
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .body(BodyInserters.fromFormData(parts))
+                .uri(uriBuilder -> uriBuilder
+                        .path("/predict")
+                        .build(0))
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(new PredicaoRequestDTO(imgUrl))
                 .retrieve()
                 .bodyToMono(PredicaoResponseDTO.class);
     }
