@@ -32,8 +32,7 @@ public class PredicaoFacade {
                             Status.CONCLUIDA,
                             usuarioId
                     );
-                    predicaoService.salvarPredicao(predicao);
-                    return Mono.just(predicaoResponseDTO);
+                    return Mono.just(predicaoService.salvarPredicao(predicao));
                 });
     }
 
