@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "predicao")
+@Document(collection = "predicoes")
 public class Predicao {
     private String id;
     private String imagem;
