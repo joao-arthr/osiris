@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - main
+      - devops/build
   pull_request:
     branches:
       - main
-      - devops/build
 
 jobs:
   build:
