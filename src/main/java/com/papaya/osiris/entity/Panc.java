@@ -23,6 +23,7 @@ public class Panc {
     private List<String> cultivo;
     private String beneficios;
     private String imagem;
+    private String locale;
 
     public Panc(PancRequestDTO pancRequest) {
         this.nome = pancRequest.nome();
@@ -30,5 +31,6 @@ public class Panc {
         this.cultivo = pancRequest.cultivo();
         this.beneficios = pancRequest.beneficios();
         this.imagem = pancRequest.imagem();
+        this.locale = pancRequest.locale();
     }
 }

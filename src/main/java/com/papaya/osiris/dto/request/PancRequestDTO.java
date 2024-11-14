@@ -7,6 +7,7 @@ public record PancRequestDTO(
         String descricao,
         List<String> cultivo,
         String beneficios,
-        String imagem
+        String imagem,
+        String locale
 ) {}
 

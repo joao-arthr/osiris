@@ -14,7 +14,8 @@ public record ReceitaResponseDTO(
         List<String> ingredientes,
         List<String> preparo,
         String imagem,
-        String usuarioId
+        String usuarioId,
+        String locale
 ) {
     public ReceitaResponseDTO(Receita receita) {
         this(receita.getId(),
@@ -24,7 +25,8 @@ public record ReceitaResponseDTO(
                 receita.getIngredientes(),
                 receita.getPreparo(),
                 receita.getImagem(),
-                receita.getUsuarioId()
+                receita.getUsuarioId(),
+                receita.getLocale()
         );
     }
 
@@ -37,7 +39,8 @@ public record ReceitaResponseDTO(
                 receita.getIngredientes(),
                 receita.getPreparo(),
                 receita.getImagem(),
-                receita.getUsuarioId()
+                receita.getUsuarioId(),
+                receita.getLocale()
         );
     }
 }

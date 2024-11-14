@@ -25,6 +25,7 @@ public class Receita {
     private List<String> preparo;
     private String imagem;
     private String usuarioId;
+    private String locale;
 
     public Receita(ReceitaRequestDTO receitaRequest) {
         this.nome = receitaRequest.nome();
@@ -34,5 +35,6 @@ public class Receita {
         this.preparo = receitaRequest.preparo();
         this.imagem = receitaRequest.imagem();
         this.usuarioId = receitaRequest.usuarioId();
+        this.locale = receitaRequest.locale();
     }
 }

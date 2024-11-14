@@ -10,7 +10,8 @@ public record PancResponseDTO(
         String descricao,
         List<String> cultivo,
         String beneficios,
-        String imagem
+        String imagem,
+        String locale
 ) {
     public PancResponseDTO(Panc panc) {
         this(panc.getId(),
@@ -18,7 +19,8 @@ public record PancResponseDTO(
                 panc.getDescricao(),
                 panc.getCultivo(),
                 panc.getBeneficios(),
-                panc.getImagem()
+                panc.getImagem(),
+                panc.getLocale()
         );
     }
 }

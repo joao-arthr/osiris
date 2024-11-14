@@ -11,6 +11,7 @@ public record ReceitaRequestDTO(
         List<String> ingredientes,
         List<String> preparo,
         String imagem,
-        String usuarioId
+        String usuarioId,
+        String locale
 ) {}
 
