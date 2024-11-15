@@ -6,6 +6,7 @@
    
    ![GitHub language count](https://img.shields.io/github/languages/count/joao-arthr/osiris)
    ![GitHub last commit](https://img.shields.io/github/last-commit/joao-arthr/osiris)
+   ![Build](https://github.com/joao-arthr/osiris/actions/workflows/build.yml/badge.svg)
 
 </div>
 
